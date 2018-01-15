@@ -3,7 +3,7 @@
 
 #include "stdio.h"
 /*
-So, this vector has to satisfy some requirements. Because rasins.
+So, this vector has to satisfy some requirements to be a real boy:
 
 vector()        O(1)
 vector(n, x)    O(n)
@@ -16,24 +16,23 @@ erase           O(size())
 front, back     O(1)
 */
 
-template <class T> class kel_vector
+template <class T> 
+class KelVector
 {
 public:
-	// Indexing operator
-	T& kel_vector<T>::operator [ ] (unsigned int i)
-	{
-		// Dynamic range checking
-		assert ((i >= 0) && (index < size));
-		return array[i];
-	}
 
+	KelVector();
+	KelVector(unsigned int size);
+	KelVector(unsigned int size, const T& initial);
+	~KelVector();
 
+	T& operator[](unsigned int index);
 
 private:
 	// How large the array is
-	int capacity;
+	unsigned int capacity;
 	// How many elements are in the array
-	int size;
+	unsigned int size;
 	// Pointer to the array
 	T *array;
 };
