@@ -1,7 +1,7 @@
 #ifndef _KEL_VECTOR_H_
 #define _KEL_VECTOR_H_
 
-#include "stdio.h"
+#include <cstddef>
 /*
 So, this vector has to satisfy some requirements to be a real boy:
 
@@ -20,6 +20,7 @@ template <class T>
 class KelVector
 {
 public:
+	typedef T* Iterator;
 
 	KelVector();
 	KelVector(unsigned int size);
@@ -27,12 +28,30 @@ public:
 	~KelVector();
 
 	T& operator[](unsigned int index);
+	const T& operator[](unsigned int index) const;
+
+	Iterator begin();
+	const Iterator begin() const;
+
+	Iterator end()
+	const Iterator end() const;
+
+	T& front();
+	const T& front() const;
+	
+	T& back();
+	const T& back() const;
+
+	std::size_t capacity() const;
+	std::size_t size() const;
+
+	void push_back(const T& element);
 
 private:
 	// How large the array is
-	unsigned int capacity;
+	std::size_t capacity;
 	// How many elements are in the array
-	unsigned int size;
+	std::size_t size;
 	// Pointer to the array
 	T *array;
 };
