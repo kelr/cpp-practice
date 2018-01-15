@@ -2,6 +2,7 @@
 #define _KEL_VECTOR_H_
 
 #include <cstddef>
+#include <assert.h>
 /*
 So, this vector has to satisfy some requirements to be a real boy:
 
@@ -30,6 +31,8 @@ public:
 	T& operator[](unsigned int index);
 	const T& operator[](unsigned int index) const;
 
+	KelVector<T>& operator=(const KelVector<T> &);
+
 	Iterator begin();
 	const Iterator begin() const;
 
@@ -47,13 +50,14 @@ public:
 
 	void push_back(const T& element);
 
+
 private:
 	// How large the array is
-	std::size_t capacity;
+	std::size_t m_capacity;
 	// How many elements are in the array
-	std::size_t size;
+	std::size_t m_size;
 	// Pointer to the array
-	T *array;
+	T* m_array;
 };
 
 
