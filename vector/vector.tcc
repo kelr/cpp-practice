@@ -139,4 +139,3 @@ void KelVector<T>::push_back(const T& element)
 {
 	m_array[m_size++] = element;
 }
-
