@@ -36,7 +36,7 @@ public:
 	Iterator begin();
 	const Iterator begin() const;
 
-	Iterator end()
+	Iterator end();
 	const Iterator end() const;
 
 	T& front();
