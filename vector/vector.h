@@ -61,8 +61,6 @@ private:
 	T* m_array;
 };
 
-#endif
-
 template<class T>
 KelVector<T>::KelVector()
 	: m_size(0)
@@ -202,3 +200,5 @@ void KelVector<T>::push_back(const T& element)
 {
 	m_array[m_size++] = element;
 }
+
+#endif
