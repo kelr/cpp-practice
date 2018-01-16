@@ -88,13 +88,13 @@ const T& KelVector<T>::back() const
 }
 
 template<class T>
-std::size_t KelVector<T>::capacity() const
+const std::size_t KelVector<T>::capacity() const
 {
 	return m_capacity;
 }
 
 template<class T>
-std::size_t KelVector<T>::size() const
+const std::size_t KelVector<T>::size() const
 {
 	return m_size;
 }
