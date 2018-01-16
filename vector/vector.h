@@ -9,7 +9,7 @@ So, this vector has to satisfy some requirements to be a real boy:
 vector()        O(1)
 vector(n, x)    O(n)
 size()          O(1)
-v[ i ]          O(1)
+v[i]            O(1)
 push_back(x)    O(1)
 pop_back        O(1)
 insert          O(size())
@@ -45,8 +45,8 @@ public:
 	T& back();
 	const T& back() const;
 
-	std::size_t capacity() const;
-	std::size_t size() const;
+	const std::size_t capacity() const;
+	const std::size_t size() const;
 
 	void push_back(const T& element);
 

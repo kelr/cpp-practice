@@ -4,8 +4,14 @@ template<class T>
 KelVector<T>::KelVector()
 	: m_size(0)
 	, m_capacity(0)
-	, m_array(new T*)
+	, m_array(0)
 {
+}
+
+template<class T>
+KelVector<T>::~KelVector()
+{
+	delete[] m_array;
 }
 
 template<class T>
@@ -19,7 +25,7 @@ T& KelVector<T>::operator[](unsigned int index)
 template<class T>
 KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 {
-	delete m_array;
+	delete[] m_array;
 	//Copy the size and capacity
 	m_size = other_vector.m_size;
 	m_capacity = other_vector.m_capacity
