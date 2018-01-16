@@ -2,6 +2,6 @@
 
 int main()
 {
-    
+    KelVector<int> snacks;
 	return 0;
 }

@@ -9,6 +9,41 @@ KelVector<T>::KelVector()
 }
 
 template<class T>
+KelVector<T>::KelVector(unsigned int size)
+{
+	m_size = size;
+	m_capacity = size;
+	m_array = new T[size];
+}
+
+template<class T>
+KelVector<T>::KelVector(unsigned int size, const T& initial)
+{
+	m_size = size;
+	m_capacity = size;
+	m_array = new T[size];
+	for(int i = 0; i < size; i++)
+	{
+		m_array[i] = initial;
+		T();
+	}
+}
+
+template<class T>
+KelVector<T>::KelVector(const KelVector<T> & vector)
+{
+	m_size = other_vector.m_size;
+	m_capacity = other_vector.m_capacity;
+
+	//Copy over the elements
+	m_array = new T[m_size];
+	for(int i = 0; i < m_size; i++)
+	{
+		m_array = other_vector[i];
+	}
+}
+
+template<class T>
 KelVector<T>::~KelVector()
 {
 	delete[] m_array;
