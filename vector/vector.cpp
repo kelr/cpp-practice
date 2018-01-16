@@ -30,7 +30,7 @@ KelVector<T>::KelVector(unsigned int size, const T& initial)
 }
 
 template<class T>
-KelVector<T>::KelVector(const KelVector<T> & vector)
+KelVector<T>::KelVector(const KelVector<T> & other_vector)
 {
 	m_size = other_vector.m_size;
 	m_capacity = other_vector.m_capacity;
