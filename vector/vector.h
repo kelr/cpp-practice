@@ -26,7 +26,7 @@ public:
 	KelVector();
 	KelVector(unsigned int size);
 	KelVector(unsigned int size, const T& initial);
-	KelVector(const KelVector<T> & vector)
+	KelVector(const KelVector<T> & vector);
 	~KelVector();
 
 	T& operator[](unsigned int index);
