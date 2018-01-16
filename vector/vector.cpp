@@ -31,7 +31,7 @@ KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 	m_capacity = other_vector.m_capacity;
 
 	//Copy over the elements
-	m_array = new T[m_size]
+	m_array = new T[m_size];
 	for(int i = 0; i < m_size; i++)
 	{
 		m_array = other_vector[i];
@@ -88,13 +88,13 @@ const T& KelVector<T>::back() const
 }
 
 template<class T>
-std::m_size_t KelVector<T>::capacity() const
+std::size_t KelVector<T>::capacity() const
 {
 	return m_capacity;
 }
 
 template<class T>
-std::m_size_t KelVector<T>::size() const
+std::size_t KelVector<T>::size() const
 {
 	return m_size;
 }
