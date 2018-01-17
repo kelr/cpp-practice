@@ -1,6 +1,5 @@
-#include <cassert>
+#include <cassert> //assert
 #include <cmath> //floor
-#include <iostream>
 #include <search.h>
 
 int sequential_search(int target, const int *target_array, std::size_t size)
@@ -20,30 +19,27 @@ int sequential_search(int target, const int *target_array, std::size_t size)
 int binary_search(int target, const int *sorted_array, std::size_t size)
 {
     //Oh boy I sure hope this array is sorted
-    std::size_t low = 0;
-    std::size_t mid = 0;
-    std::size_t high = size;
+    int low_index = 0;
+    int mid_index = 0;
+    // I have to use int otherwise the alg won't terminate when you try to find a value < arr[0]
+    int high_index = static_cast<int>(size) - 1;
     int found_target = -1;
 
-    //Arent types just great? 
-    mid = static_cast<std::size_t>(floor((static_cast<float>(high) + static_cast<float>(low)) / 2.0));
-
-    while (low != high && found_target == -1)
+    while ((low_index <= high_index) && (found_target == -1))
     {
-        if (target == sorted_array[mid])
+        //Arent types just great? 
+        mid_index = static_cast<int>(floor((static_cast<float>(high_index) + static_cast<float>(low_index)) / 2.0));
+        if (target == sorted_array[mid_index])
         {
-            found_target = mid;
+            found_target = mid_index;
         }
-        else if (target > sorted_array[mid])
+        else if (target < sorted_array[mid_index])
         {
-            low = mid + 1;
-            mid = static_cast<std::size_t>(floor((static_cast<float>(high) + static_cast<float>(low)) / 2.0));
-            std::cout << mid << std::endl;
+            high_index = mid_index - 1;
         }
         else
         {
-            high = mid - 1;
-            mid = static_cast<std::size_t>(floor((static_cast<float>(high) + static_cast<float>(low)) / 2.0));
+            low_index = mid_index + 1;
         }
     }
     return found_target;
@@ -52,23 +48,30 @@ int binary_search(int target, const int *sorted_array, std::size_t size)
 int main(void)
 {
     const int test_array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    const int bigger_array[25] = {0, 5, 7, 20, 23, 263, 277, 289, 310, 321, 353, 363, 389, 410, 420, 430, 440, 500, 600, 700, 999, 1024, 2048, 2500, 9999};
     // Get the size of the C style array
     std::size_t size = sizeof(test_array)/sizeof(test_array[0]);
+    std::size_t size_bigger = sizeof(bigger_array)/sizeof(bigger_array[0]);
 
-    int target = 3;
+    assert(sequential_search(3, test_array, size) == 2);
+    assert(sequential_search(4, test_array, size) == 3);
+    assert(sequential_search(0, test_array, size) == -1);
+    assert(sequential_search(10, test_array, size) == 9);
 
-    int seq_result = sequential_search(target, test_array, size);
-    int binary_result = binary_search(target, test_array, size);
-    //std::cout << seq_result << std::endl;
-    //std::cout << binary_result << std::endl;
-    assert(seq_result == 2);
-    assert(binary_result == 2);
+    assert(sequential_search(263, bigger_array, size_bigger) == 5);
+    assert(sequential_search(2500, bigger_array, size_bigger) == 23);
+    assert(sequential_search(777, bigger_array, size_bigger) == -1);
+    assert(sequential_search(0, bigger_array, size_bigger) == 0);
 
-    seq_result = sequential_search(8, test_array, size);
-    binary_result = binary_search(8, test_array, size);
-    //std::cout << seq_result << std::endl;
-    //std::cout << binary_result << std::endl;
-    assert(seq_result == 7);
-    assert(binary_result == 7);
+    assert(binary_search(3, test_array, size) == 2);
+    assert(binary_search(4, test_array, size) == 3);
+    assert(binary_search(0, test_array, size) == -1);
+    assert(binary_search(10, test_array, size) == 9);    
+
+    assert(binary_search(263, bigger_array, size_bigger) == 5);
+    assert(binary_search(2500, bigger_array, size_bigger) == 23);
+    assert(binary_search(777, bigger_array, size_bigger) == -1);
+    assert(binary_search(0, bigger_array, size_bigger) == 0);
+
     return 0;
 }
