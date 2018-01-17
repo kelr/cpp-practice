@@ -3,7 +3,6 @@
 
 #include <cstddef> //size_t
 
-
 int sequential_search(int target, const int target_array[], std::size_t size);
 int binary_search(int target, const int sorted_array[], std::size_t size);
 
