@@ -25,16 +25,16 @@ public:
 	typedef T* Iterator;
 
 	KelVector();
-	KelVector(unsigned int size);
-	KelVector(unsigned int size, const T& initial);
+	KelVector(std::size_t size);
+	KelVector(std::size_t size, const T& initial);
 	KelVector(const KelVector<T> & other_vector);
 	~KelVector();
 
-	T& operator[](unsigned int index);
-	const T& operator[](unsigned int index) const;
+	T& operator[](std::size_t index);
+	const T& operator[](std::size_t index) const;
 	KelVector<T> & operator=(const KelVector<T> &);
 
-	void resize(unsigned int new_size);
+	void resize(std::size_t new_size);
 
 	bool empty() const;
 
@@ -52,7 +52,8 @@ public:
 
 	void push_back(const T& element);
 	void pop_back();
-
+	
+	void clear();
 	void print_all();
 
 private:
@@ -73,7 +74,7 @@ KelVector<T>::KelVector()
 }
 
 template<class T>
-KelVector<T>::KelVector(unsigned int size)
+KelVector<T>::KelVector(std::size_t size)
 {
 	m_size = size;
 	m_capacity = size;
@@ -81,7 +82,7 @@ KelVector<T>::KelVector(unsigned int size)
 }
 
 template<class T>
-KelVector<T>::KelVector(unsigned int size, const T& initial)
+KelVector<T>::KelVector(std::size_t size, const T& initial)
 {
 	m_array = new T[size];
 	m_size = size;
@@ -115,7 +116,7 @@ KelVector<T>::~KelVector()
 }
 
 template<class T>
-T& KelVector<T>::operator[](unsigned int index)
+T& KelVector<T>::operator[](std::size_t index)
 {
 	// Some dynamic range checking
 	assert((index >= 0) && (index < m_size));
@@ -123,7 +124,7 @@ T& KelVector<T>::operator[](unsigned int index)
 }
 
 template<class T>
-const T& KelVector<T>::operator[](unsigned int index) const
+const T& KelVector<T>::operator[](std::size_t index) const
 {
 	// Some dynamic range checking
 	assert((index >= 0) && (index < m_size));
@@ -150,7 +151,7 @@ KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 }
 
 template<class T>
-void KelVector<T>::resize(unsigned int new_capacity)
+void KelVector<T>::resize(std::size_t new_capacity)
 {
 	T* temp_array = new T[new_capacity];
 	for (std::size_t i = 0; i < m_size; i++)
@@ -250,6 +251,21 @@ void KelVector<T>::push_back(const T& element)
 	m_array[m_size++] = element;
 }
 
+template<class T>
+void KelVector<T>::pop_back()
+{
+	m_size--;
+	m_capacity--;
+}
+template<class T>
+void KelVector<T>::clear()
+{
+	delete[] m_array;
+	T* m_array;
+	m_size = 0;
+	m_capacity = 0;
+
+}
 template<class T>
 void KelVector<T>::print_all()
 {
