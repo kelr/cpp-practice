@@ -11,7 +11,7 @@ vector()        O(1)
 vector(n, x)    O(n)
 size()          O(1)
 v[i]            O(1)
-push_back(x)    O(1)
+push_back(x)    O(1) (amortized!)
 pop_back        O(1)
 insert          O(size())
 erase           O(size())
@@ -34,9 +34,9 @@ public:
 	const T& operator[](std::size_t index) const;
 	KelVector<T> & operator=(const KelVector<T> &);
 
-	void resize(std::size_t new_size);
+	void reserve(std::size_t new_size);
 
-	bool empty() const;
+	bool is_empty() const;
 
 	Iterator begin();
 	const Iterator begin() const;
@@ -52,7 +52,7 @@ public:
 
 	void push_back(const T& element);
 	void pop_back();
-	
+
 	void clear();
 	void print_all();
 
@@ -151,7 +151,7 @@ KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 }
 
 template<class T>
-void KelVector<T>::resize(std::size_t new_capacity)
+void KelVector<T>::reserve(std::size_t new_capacity)
 {
 	T* temp_array = new T[new_capacity];
 	for (std::size_t i = 0; i < m_size; i++)
@@ -169,7 +169,7 @@ void KelVector<T>::resize(std::size_t new_capacity)
 }
 
 template<class T>
-bool KelVector<T>::empty() const
+bool KelVector<T>::is_empty() const
 {
 	return m_size == 0;
 }
@@ -189,13 +189,13 @@ const typename KelVector<T>::Iterator KelVector<T>::begin() const
 template<class T>
 typename KelVector<T>::Iterator KelVector<T>::end()
 {
-	return m_array + size();
+	return m_array + (size() - 1);
 }
 
 template<class T>
 const typename KelVector<T>::Iterator KelVector<T>::end() const
 {
-	return m_array + size();
+	return m_array + (size() - 1);
 }
 
 template<class T>
@@ -241,11 +241,11 @@ void KelVector<T>::push_back(const T& element)
 	{
 		if (m_capacity != 0)
 		{
-			resize(m_capacity * 2);
+			reserve(m_capacity * 2);
 		}
 		else
 		{
-			resize(1);
+			reserve(1);
 		}
 	}
 	m_array[m_size++] = element;
