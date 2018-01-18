@@ -1,6 +1,7 @@
 #ifndef _KEL_VECTOR_H_
 #define _KEL_VECTOR_H_
 
+#include <iostream>
 #include <cstddef>
 #include <assert.h>
 /*
@@ -31,7 +32,7 @@ public:
 
 	T& operator[](unsigned int index);
 	const T& operator[](unsigned int index) const;
-	KelVector<T>& operator=(const KelVector<T> &);
+	KelVector<T> & operator=(const KelVector<T> &);
 
 	void resize(unsigned int new_size);
 
@@ -51,6 +52,8 @@ public:
 
 	void push_back(const T& element);
 	void pop_back();
+
+	void print_all();
 
 private:
 	// How large the array is
@@ -80,9 +83,9 @@ KelVector<T>::KelVector(unsigned int size)
 template<class T>
 KelVector<T>::KelVector(unsigned int size, const T& initial)
 {
+	m_array = new T[size];
 	m_size = size;
 	m_capacity = size;
-	m_array = new T[size];
 	for(int i = 0; i < size; i++)
 	{
 		m_array[i] = initial;
@@ -93,14 +96,15 @@ KelVector<T>::KelVector(unsigned int size, const T& initial)
 template<class T>
 KelVector<T>::KelVector(const KelVector<T> & other_vector)
 {
+	m_array = new T[other_vector.m_capacity];
+
 	m_size = other_vector.m_size;
 	m_capacity = other_vector.m_capacity;
 
 	//Copy over the elements
-	m_array = new T[m_size];
 	for(int i = 0; i < m_size; i++)
 	{
-		m_array = other_vector[i];
+		m_array[i] = other_vector.m_array[i];
 	}
 }
 
@@ -121,16 +125,18 @@ T& KelVector<T>::operator[](unsigned int index)
 template<class T>
 KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 {
+	// Delete the old array and make a new one
 	delete[] m_array;
+	m_array = new T[other_vector.m_capacity];
+
 	//Copy the size and capacity
 	m_size = other_vector.m_size;
 	m_capacity = other_vector.m_capacity;
 
 	//Copy over the elements
-	m_array = new T[m_size];
-	for(int i = 0; i < m_size; i++)
+	for(std::size_t i = 0; i < m_size; i++)
 	{
-		m_array = other_vector[i];
+		m_array[i] = other_vector.m_array[i];
 	}
 	return *this;
 }
@@ -220,10 +226,28 @@ void KelVector<T>::push_back(const T& element)
 	{
 		if (m_capacity != 0)
 		{
-
+			resize(m_capacity * 2);
+		}
+		else
+		{
+			resize(1);
 		}
 	}
 	m_array[m_size++] = element;
+}
+
+template<class T>
+void KelVector<T>::print_all()
+{
+	for (std::size_t i = 0; i < m_size; i++)
+	{
+		std::cout << m_array[i];
+		if (i != m_size-1)
+		{
+			std::cout << ", ";
+		}
+	}
+	std::cout << std::endl;
 }
 
 #endif
