@@ -123,6 +123,14 @@ T& KelVector<T>::operator[](unsigned int index)
 }
 
 template<class T>
+const T& KelVector<T>::operator[](unsigned int index) const
+{
+	// Some dynamic range checking
+	assert((index >= 0) && (index < m_size));
+	return m_array[index];
+}
+
+template<class T>
 KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 {
 	// Delete the old array and make a new one
@@ -157,6 +165,12 @@ void KelVector<T>::resize(unsigned int new_capacity)
 
 	m_array = temp_array;
 	m_capacity = new_capacity;
+}
+
+template<class T>
+bool KelVector<T>::empty() const
+{
+	return m_size == 0;
 }
 
 template<class T>
