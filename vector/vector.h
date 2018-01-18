@@ -31,18 +31,18 @@ public:
 
 	T& operator[](unsigned int index);
 	const T& operator[](unsigned int index) const;
-
 	KelVector<T>& operator=(const KelVector<T> &);
+
+	void resize(unsigned int new_size);
+
+	bool empty() const;
 
 	Iterator begin();
 	const Iterator begin() const;
-
 	Iterator end();
 	const Iterator end() const;
-
 	T& front();
 	const T& front() const;
-	
 	T& back();
 	const T& back() const;
 
@@ -50,7 +50,7 @@ public:
 	const std::size_t size() const;
 
 	void push_back(const T& element);
-
+	void pop_back();
 
 private:
 	// How large the array is
@@ -136,6 +136,24 @@ KelVector<T>& KelVector<T>::operator=(const KelVector<T> & other_vector)
 }
 
 template<class T>
+void KelVector<T>::resize(unsigned int new_capacity)
+{
+	T* temp_array = new T[new_capacity];
+	for (std::size_t i = 0; i < m_size; i++)
+	{
+		temp_array[i] = m_array[i];
+	}
+
+	if (m_array != NULL)
+	{
+		delete[] m_array;
+	}
+
+	m_array = temp_array;
+	m_capacity = new_capacity;
+}
+
+template<class T>
 typename KelVector<T>::Iterator KelVector<T>::begin()
 {
 	return m_array;
@@ -198,6 +216,13 @@ const std::size_t KelVector<T>::size() const
 template<class T>
 void KelVector<T>::push_back(const T& element)
 {
+	if (m_size == m_capacity)
+	{
+		if (m_capacity != 0)
+		{
+
+		}
+	}
 	m_array[m_size++] = element;
 }
 
