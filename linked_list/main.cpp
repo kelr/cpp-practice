@@ -4,16 +4,22 @@
 int main(void)
 {
     SinglyLinkedList list = SinglyLinkedList();
-    Node* input = new Node;
-    input->data = 1;
+    list.push_back(1);
 
-    list.push_back(input);
-    list.push_back(input);
-    list.push_back(input);
-    list.push_back(input);
+    list.push_back(2);
+
+    list.push_back(3);
+
+    list.push_back(4);
     list.print();
 
-    delete input;
+    list.pop_back();
+    list.print();
+
+    list.push_head(7);
+    list.print();
+
+
 
     return 0;
 }

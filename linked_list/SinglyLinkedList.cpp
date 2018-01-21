@@ -13,18 +13,21 @@ SinglyLinkedList::~SinglyLinkedList()
     tail = NULL;
 }
 
-void SinglyLinkedList::push_back(Node* new_node)
+void SinglyLinkedList::push_back(int input_data)
 {
+    Node* new_node = new Node;
+    new_node->data = input_data;
+
     if (head == NULL)
     {
         head = new_node;
         tail = new_node;
+        new_node = NULL;
     }
     else
     {
         tail->next = new_node;
         tail = new_node;
-        new_node->next = NULL;
     }
     size++;
 }
@@ -39,7 +42,7 @@ void SinglyLinkedList::pop_back()
     {
         Node* current_node = head;
         Node* previous_node = head;
-        while (current_node != NULL)
+        while (current_node->next != NULL)
         {
             previous_node = current_node;
             current_node = current_node->next;
@@ -51,12 +54,16 @@ void SinglyLinkedList::pop_back()
     }
 }
 
-void SinglyLinkedList::push_head(Node* new_node)
+void SinglyLinkedList::push_head(int input_data)
 {
+    Node* new_node = new Node;
+    new_node->data = input_data;
+
     if (head == NULL)
     {
         head = new_node;
         tail = new_node;
+        new_node = NULL;
     }
     else
     {
@@ -152,13 +159,32 @@ void SinglyLinkedList::print() const
 {
     Node* current_node = head;
     unsigned int i = 0;
-    while (current_node->next != NULL)
+    std::cout << "============== SinglyLinkedList size " << size << " ==================" << std::endl; 
+    while (1)
     {
-        std::cout << "[Position " << i << " Data: " << current_node->data << "]" << std::endl;
-        std::cout << "                 |\n";
-        std::cout << "                 |\n";
-        std::cout << "                 V\n";
+        std::cout << "[Node Position: " << i << " Data: " << current_node->data << "]";
+        if (i == 0)
+        {
+            std::cout << " <---- HEAD"; 
+        }
+        if (current_node->next == NULL)
+        {
+            std::cout << " <---- TAIL" << std::endl; 
+            std::cout << "                |\n";
+            std::cout << "                |\n";
+            std::cout << "                V\n";
+            std::cout << "              NULL\n\n";
+            break;
+        }
+        else
+        {
+            std::cout << std::endl;
+            std::cout << "                |\n";
+            std::cout << "                |\n";
+            std::cout << "                V\n";
+        }
         current_node = current_node->next;
+        i++;
     }
     current_node = NULL;
 }

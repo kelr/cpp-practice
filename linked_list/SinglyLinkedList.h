@@ -6,9 +6,9 @@
 
 typedef struct Node
 {  
-    int data;
+    int data = 0;
     // Pointer to the next Node
-    Node *next;
+    Node *next = NULL;
 }Node;
 
 class SinglyLinkedList
@@ -17,11 +17,11 @@ public:
     SinglyLinkedList();
     ~SinglyLinkedList();
 
-    void push_back(Node* new_node);
+    void push_back(int input_data);
 
     void pop_back();
 
-    void push_head(Node* new_node);
+    void push_head(int input_data);
 
     void pop_head();
 
