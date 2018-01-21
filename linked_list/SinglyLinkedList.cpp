@@ -4,11 +4,13 @@ SinglyLinkedList::SinglyLinkedList()
 {
     head = NULL;
     tail = NULL;
+    size = 0;
 }
 
 SinglyLinkedList::~SinglyLinkedList()
 {
-
+    head = NULL;
+    tail = NULL;
 }
 
 void SinglyLinkedList::push_back(Node* new_node)
@@ -21,6 +23,7 @@ void SinglyLinkedList::push_back(Node* new_node)
     else
     {
         tail->next = new_node;
+        tail = new_node;
         new_node->next = NULL;
     }
     size++;
@@ -147,6 +150,16 @@ Node* SinglyLinkedList::get_node(unsigned int position) const
 
 void SinglyLinkedList::print() const
 {
-
+    Node* current_node = head;
+    unsigned int i = 0;
+    while (current_node->next != NULL)
+    {
+        std::cout << "[Position " << i << " Data: " << current_node->data << "]" << std::endl;
+        std::cout << "                 |\n";
+        std::cout << "                 |\n";
+        std::cout << "                 V\n";
+        current_node = current_node->next;
+    }
+    current_node = NULL;
 }
 
