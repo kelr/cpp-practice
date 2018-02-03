@@ -43,10 +43,10 @@ const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end() const
 }
 
 template<class T>
-void SinglyLinkedList<T>::push_back(const &T input)
+void SinglyLinkedList<T>::push_back(const T& input_data)
 {
-    Node<T>* new_node = new Node;
-    new_node->data = input;
+    Node<T>* new_node = {input_data, nullptr};
+    new_node->data = input_data;
 
     if (head == nullptr)
     {
@@ -87,10 +87,10 @@ void SinglyLinkedList<T>::pop_back()
 }
 
 template<class T>
-void SinglyLinkedList<T>::push_head(const &T input)
+void SinglyLinkedList<T>::push_head(const T& input_data)
 {
-    Node<T>* new_node = new Node;
-    new_node->data = input;
+    Node<T>* new_node = {input_data, nullptr};
+    new_node->data = input_data;
 
     if (head == nullptr)
     {
@@ -117,7 +117,7 @@ void SinglyLinkedList<T>::pop_head()
     {
         Node<T>* temp_head = head;
         head = head->next;
-        delete(temp_head)
+        delete(temp_head);
         temp_head = nullptr;
         size--;   
     }
@@ -125,13 +125,16 @@ void SinglyLinkedList<T>::pop_head()
 
 // Position starts from 0, which is head
 template<class T>
-void SinglyLinkedList<T>::insert(const &T data, SinglyLinkedList<T>::iterator position)
+void SinglyLinkedList<T>::insert(const T& input_data, SinglyLinkedList<T>::iterator position)
 {
+    Node<T>* new_node = {input_data, nullptr};
+    new_node->data = input_data;
+
     Node<T>* curr_node = head;
     Node<T>* prev_node = head;
     iterator iter;
 
-    for (iter = begin(); i != position; iter++)
+    for (iter = begin(); iter != position; iter++)
     {
         prev_node = curr_node;
         curr_node = curr_node->next;
@@ -152,7 +155,7 @@ void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
     Node<T>* prev_node = head;
     iterator iter;
 
-    for (iter = begin(); i != position; iter++)
+    for (iter = begin(); iter != position; iter++)
     {
         prev_node = curr_node;
         curr_node = curr_node->next;
@@ -160,7 +163,7 @@ void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
 
     prev_node->next = curr_node->next;
     curr_node->next = nullptr;
-    delete(curr_node)
+    delete(curr_node);
     curr_node = nullptr;
     prev_node = nullptr;
     size--;
@@ -196,7 +199,7 @@ Node<T>* SinglyLinkedList<T>::get_node(iterator position) const
 {
     Node<T>* current_node = head;
     iterator iter;
-    for (iter = begin(); i != position; iter++)
+    for (iter = begin(); iter != position; iter++)
     {
         if (current_node->next == nullptr)
         {
