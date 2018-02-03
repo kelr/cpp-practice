@@ -24,7 +24,12 @@ int main(void)
     queue->dequeue();
     queue->dequeue();
     queue->dequeue();
+
+    assert(queue->is_empty());
+    
     queue->dequeue();
+
+    assert(queue->is_empty());
 
     delete(queue);
 
