@@ -4,12 +4,10 @@
 #include <cstddef> // std::size_t
 #include <iostream> // std::cout, std::endl
 
-
 template <class T>
 class SinglyLinkedList
 {
 public:
-
     typedef T* iterator;
 
     SinglyLinkedList();
@@ -22,19 +20,19 @@ public:
     const iterator end() const;
 
     // Add a node to the back of the list
-    void push_back(const T& input_data);
+    void push_back(const T &input_data);
 
     // Remove a node from the back of the list
     void pop_back();
 
     // Add a node to the front of the list
-    void push_head(const T& input_data);
+    void push_head(const T &input_data);
 
     // Remove a node from the front of the list
     void pop_head();
 
     // Insert data at position
-    void insert(const T& input_data, iterator position);
+    void insert(const T &input_data, iterator position);
 
     void remove(iterator position);
 
@@ -60,7 +58,7 @@ public:
 private:
     struct Node
     {  
-        T* data;
+        T data;
         Node* next;
     };
 

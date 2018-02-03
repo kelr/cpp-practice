@@ -43,9 +43,9 @@ const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end() const
 }
 
 template<class T>
-void SinglyLinkedList<T>::push_back(const T& input_data)
+void SinglyLinkedList<T>::push_back(const T &input_data)
 {
-    Node* new_node;
+    Node* new_node = new Node;
     new_node->data = input_data;
 
     if (head == nullptr)
@@ -87,9 +87,9 @@ void SinglyLinkedList<T>::pop_back()
 }
 
 template<class T>
-void SinglyLinkedList<T>::push_head(const T& input_data)
+void SinglyLinkedList<T>::push_head(const T &input_data)
 {
-    Node* new_node;
+    Node* new_node = new Node;
     new_node->data = input_data;
 
     if (head == nullptr)
@@ -125,9 +125,9 @@ void SinglyLinkedList<T>::pop_head()
 
 // Position starts from 0, which is head
 template<class T>
-void SinglyLinkedList<T>::insert(const T& input_data, SinglyLinkedList<T>::iterator position)
+void SinglyLinkedList<T>::insert(const T &input_data, SinglyLinkedList<T>::iterator position)
 {
-    Node* new_node;
+    Node* new_node = new Node;
     new_node->data = input_data;
 
     Node* curr_node = head;
