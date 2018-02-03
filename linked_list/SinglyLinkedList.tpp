@@ -26,28 +26,24 @@ SinglyLinkedList<T>::~SinglyLinkedList()
     tail = nullptr;
 }
 
-// Returns the pointer to the head of the vector
 template<class T>
 typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin()
 {
     return head;
 }
 
-// Const version for the pointer to the head of the vector
 template<class T>
 const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin() const
 {
     return head;
 }
 
-// Returns the pointer to the butt of the vector
 template<class T>
 typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end()
 {
     return tail;
 }
 
-// Const version for the pointer to the butt of the vector
 template<class T>
 const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end() const
 {
