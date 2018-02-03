@@ -4,12 +4,6 @@
 #include <cstddef> // std::size_t
 #include <iostream> // std::cout, std::endl
 
-template <class T>
-struct Node
-{  
-    T* data;
-    Node<T>* next;
-};   
 
 template <class T>
 class SinglyLinkedList
@@ -44,15 +38,15 @@ public:
 
     void remove(iterator position);
 
-    Node<T>* get_head() const;
+    typename SinglyLinkedList<T>::Node* get_head() const;
 
-    Node<T>* get_tail() const;
+    typename SinglyLinkedList<T>::Node* get_tail() const;
 
     std::size_t get_size() const;
 
     bool is_empty() const;
 
-    Node<T>* get_node(iterator position) const;
+    typename SinglyLinkedList<T>::Node* get_node(iterator position) const;
 
     void print() const;
 
@@ -64,8 +58,14 @@ public:
     //remove_value(value) remove first encounter of value
 
 private:
-    Node<T>* head;
-    Node<T>* tail;
+    struct Node
+    {  
+        T* data;
+        Node* next;
+    };
+
+    Node* head;
+    Node* tail;
     std::size_t size;
 };
 

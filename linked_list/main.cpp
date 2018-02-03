@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    SinglyLinkedList list = SinglyLinkedList();
+    SinglyLinkedList<int> list;
     list.push_back(1);
 
     list.push_back(2);
@@ -18,8 +18,6 @@ int main(void)
 
     list.push_head(7);
     list.print();
-
-
 
     return 0;
 }

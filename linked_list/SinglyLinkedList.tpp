@@ -45,7 +45,7 @@ const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end() const
 template<class T>
 void SinglyLinkedList<T>::push_back(const T& input_data)
 {
-    Node<T>* new_node = {input_data, nullptr};
+    Node* new_node;
     new_node->data = input_data;
 
     if (head == nullptr)
@@ -72,8 +72,8 @@ void SinglyLinkedList<T>::pop_back()
     else
     {
         // Gotta come in from the front...which is O(n)...lame
-        Node<T>* curr_node = head;
-        Node<T>* prev_node = head;
+        Node* curr_node = head;
+        Node* prev_node = head;
         while (curr_node->next != nullptr)
         {
             prev_node = curr_node;
@@ -89,7 +89,7 @@ void SinglyLinkedList<T>::pop_back()
 template<class T>
 void SinglyLinkedList<T>::push_head(const T& input_data)
 {
-    Node<T>* new_node = {input_data, nullptr};
+    Node* new_node;
     new_node->data = input_data;
 
     if (head == nullptr)
@@ -115,7 +115,7 @@ void SinglyLinkedList<T>::pop_head()
     }
     else
     {
-        Node<T>* temp_head = head;
+        Node* temp_head = head;
         head = head->next;
         delete(temp_head);
         temp_head = nullptr;
@@ -127,11 +127,11 @@ void SinglyLinkedList<T>::pop_head()
 template<class T>
 void SinglyLinkedList<T>::insert(const T& input_data, SinglyLinkedList<T>::iterator position)
 {
-    Node<T>* new_node = {input_data, nullptr};
+    Node* new_node;
     new_node->data = input_data;
 
-    Node<T>* curr_node = head;
-    Node<T>* prev_node = head;
+    Node* curr_node = head;
+    Node* prev_node = head;
     iterator iter;
 
     for (iter = begin(); iter != position; iter++)
@@ -151,8 +151,8 @@ void SinglyLinkedList<T>::insert(const T& input_data, SinglyLinkedList<T>::itera
 template<class T>
 void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
 {
-    Node<T>* curr_node = head;
-    Node<T>* prev_node = head;
+    Node* curr_node = head;
+    Node* prev_node = head;
     iterator iter;
 
     for (iter = begin(); iter != position; iter++)
@@ -170,13 +170,13 @@ void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
 }
 
 template<class T>
-Node<T>* SinglyLinkedList<T>::get_head() const
+typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_head() const
 {
     return head;
 }
 
 template<class T>
-Node<T>* SinglyLinkedList<T>::get_tail() const
+typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_tail() const
 {
     return tail;
 }
@@ -195,9 +195,9 @@ bool SinglyLinkedList<T>::is_empty() const
 
 // Inputting a position greater than size-1 results in tail
 template<class T>
-Node<T>* SinglyLinkedList<T>::get_node(iterator position) const
+typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(iterator position) const
 {
-    Node<T>* current_node = head;
+    Node* current_node = head;
     iterator iter;
     for (iter = begin(); iter != position; iter++)
     {
@@ -213,7 +213,7 @@ Node<T>* SinglyLinkedList<T>::get_node(iterator position) const
 template<class T>
 void SinglyLinkedList<T>::print() const
 {
-    Node<T>* current_node = head;
+    Node* current_node = head;
     int i = 0;
     std::cout << "============== SinglyLinkedList size " << size << " ==================" << std::endl; 
     while (1)
