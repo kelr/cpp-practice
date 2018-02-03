@@ -24,7 +24,7 @@ private:
         T data;
         Node* next = nullptr;
     };
-    
+
     Node* head;
     Node* tail;
 };

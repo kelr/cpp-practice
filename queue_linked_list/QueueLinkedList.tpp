@@ -68,5 +68,21 @@ bool QueueLinkedList<T>::is_empty() const
 template<class T>
 void QueueLinkedList<T>::print()
 {
-    
+    if (!is_empty())
+    {
+        Node* curr_node = head;
+
+        std::cout << "Front -";
+        while (curr_node->next != nullptr)
+        {
+            std::cout << "[ " << curr_node->data << " ]";
+            curr_node = curr_node->next;
+        }
+        std::cout << "[ " << curr_node->data << " ]";
+        std::cout << "- Back" << std::endl; 
+    }
+    else
+    {
+        std::cout << "Queue is empty" << std::endl;
+    }
 }
