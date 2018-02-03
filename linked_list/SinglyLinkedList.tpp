@@ -231,8 +231,7 @@ void SinglyLinkedList<T>::print() const
 template<class T>
 T SinglyLinkedList<T>::get_data_at(iterator position) const
 {
-
-
+    return get_node(position)->data;
 }
 
 template<class T>
@@ -244,7 +243,38 @@ void SinglyLinkedList<T>::reverse()
 template<class T>
 void SinglyLinkedList<T>::remove_first_encounter(const T &input_data)
 {
+    // If C++ had decorators that would be nice
+    if (head != nullptr)
+    {
+        if (head->data == input_data)
+        {
+            pop_head();
+        }
+        else
+        {
+            Node* curr_node = head;
+            Node* prev_node = head;
+            iterator iter;
 
+            while (curr_node->next != nullptr)
+            {
+                if (curr_node->data == input_data)
+                {
+                    prev_node->next = curr_node->next;
+                    curr_node->next = nullptr;
+                    delete(curr_node);
+                    curr_node = nullptr;
+                    prev_node = nullptr;
+                    size--;
+                }
+                else
+                {
+                    prev_node = curr_node;
+                    curr_node = curr_node->next;
+                }
+            }
+        }
+    }
 }
 
 
@@ -253,14 +283,17 @@ template<class T>
 typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(iterator position) const
 {
     Node* current_node = head;
-    iterator iter;
-    for (iter = begin(); iter != position; iter++)
+    if (current_node != nullptr)
     {
-        if (current_node->next == nullptr)
+        iterator iter;
+        for (iter = begin(); iter != position; iter++)
         {
-            break;
+            if (current_node->next == nullptr)
+            {
+                break;
+            }
+            current_node = current_node->next;
         }
-        current_node = current_node->next;
     }
     return current_node;
 }
