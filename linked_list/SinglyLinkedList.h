@@ -4,28 +4,39 @@
 #include <cstddef> // std::size_t
 #include <iostream> // std::cout, std::endl
 
-typedef struct Node
-{  
-    int data = 0;
-    // Pointer to the next Node
-    Node *next = NULL;
-}Node;
 
+template <class T>
 class SinglyLinkedList
 {
 public:
+
+    typedef T* Iterator;
+
     SinglyLinkedList();
     ~SinglyLinkedList();
 
-    void push_back(int input_data);
 
+    Iterator begin();
+    const Iterator begin() const;
+    
+    Iterator end();
+    const Iterator end() const;
+
+    // Add a node to the back of the list
+    void push_back(const &T input);
+
+    // Remove a node from the back of the list
     void pop_back();
 
-    void push_head(int input_data);
+    // Add a node to the front of the list
+    void push_head(const &T input);
 
+    // Remove a node from the front of the list
     void pop_head();
 
-    void insert(Node* new_node, unsigned int position);
+    // Insert data at position
+    void insert(const &T data, unsigned int position);
+
 
     void remove(unsigned int position);
 
@@ -41,9 +52,23 @@ public:
 
     void print() const;
 
+
+    //size() num of elements
+    //erase(index) remove node at index 
+    //get_value_from_back(n) get value of node at nth position from end
+    //reverse() reverse list
+    //remove_value(value) remove first encounter of value
+
 private:
-    Node *head;
-    Node *tail;
+    template <class T>
+    struct Node
+    {  
+        T data;
+        Node *next;
+    }   
+
+    Node<T> *head;
+    Node<T> *tail;
     std::size_t size;
 };
 

@@ -1,22 +1,53 @@
 #include "SinglyLinkedList.h"
 
-SinglyLinkedList::SinglyLinkedList()
+template<class T>
+SinglyLinkedList<T>::SinglyLinkedList()
 {
-    head = NULL;
-    tail = NULL;
+    head = nullptr;
+    tail = nullptr;
     size = 0;
 }
 
-SinglyLinkedList::~SinglyLinkedList()
+template<class T>
+SinglyLinkedList<T>::~SinglyLinkedList()
 {
-    head = NULL;
-    tail = NULL;
+    head = nullptr;
+    tail = nullptr;
 }
 
-void SinglyLinkedList::push_back(int input_data)
+// Returns the pointer to the head of the vector
+template<class T>
+typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::begin()
 {
-    Node* new_node = new Node;
-    new_node->data = input_data;
+    return head;
+}
+
+// Const version for the pointer to the head of the vector
+template<class T>
+const typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::begin() const
+{
+    return head;
+}
+
+// Returns the pointer to the butt of the vector
+template<class T>
+typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::end()
+{
+    return tail;
+}
+
+// Const version for the pointer to the butt of the vector
+template<class T>
+const typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::end() const
+{
+    return tail;
+}
+
+template<class T>
+void SinglyLinkedList<T>::push_back(const &T input)
+{
+    Node<T> *new_node = new Node;
+    new_node->data = input;
 
     if (head == NULL)
     {
@@ -32,7 +63,8 @@ void SinglyLinkedList::push_back(int input_data)
     size++;
 }
 
-void SinglyLinkedList::pop_back()
+template<class T>
+void SinglyLinkedList<T>::pop_back()
 {
     if (head == NULL)
     {
@@ -54,10 +86,11 @@ void SinglyLinkedList::pop_back()
     }
 }
 
-void SinglyLinkedList::push_head(int input_data)
+template<class T>
+void SinglyLinkedList<T>::push_head(const &T input)
 {
     Node* new_node = new Node;
-    new_node->data = input_data;
+    new_node->data = input;
 
     if (head == NULL)
     {
@@ -73,7 +106,8 @@ void SinglyLinkedList::push_head(int input_data)
     size++;
 }
 
-void SinglyLinkedList::pop_head()
+template<class T>
+void SinglyLinkedList<T>::pop_head()
 {
     if (head == NULL)
     {
@@ -88,7 +122,8 @@ void SinglyLinkedList::pop_head()
 }
 
 // Starts from zero, which is head
-void SinglyLinkedList::insert(Node* new_node, unsigned int position)
+template<class T>
+void SinglyLinkedList<T>::insert(const &T data, unsigned int position)
 {
     Node* current_node = head;
     Node* previous_node = head;
@@ -104,7 +139,8 @@ void SinglyLinkedList::insert(Node* new_node, unsigned int position)
     size++;
 }
 
-void SinglyLinkedList::remove(unsigned int position)
+template<class T>
+void SinglyLinkedList<T>::remove(unsigned int position)
 {
     Node* current_node = head;
     Node* previous_node = head;
@@ -120,28 +156,33 @@ void SinglyLinkedList::remove(unsigned int position)
     size--;
 }
 
-Node* SinglyLinkedList::get_head() const
+template<class T>
+Node* SinglyLinkedList<T>::get_head() const
 {
     return head;
 }
 
-Node* SinglyLinkedList::get_tail() const
+template<class T>
+Node* SinglyLinkedList<T>::get_tail() const
 {
     return tail;
 }
 
-std::size_t SinglyLinkedList::get_size() const
+template<class T>
+std::size_t SinglyLinkedList<T>::get_size() const
 {
     return size;
 }
 
-bool SinglyLinkedList::is_empty() const
+template<class T>
+bool SinglyLinkedList<T>::is_empty() const
 {
     return size == 0;
 }
 
 // Inputting a position greater than size-1 results in tail
-Node* SinglyLinkedList::get_node(unsigned int position) const
+template<class T>
+Node* SinglyLinkedList<T>::get_node(unsigned int position) const
 {
     Node* current_node = head;
     for (unsigned int i = 0; i < position; i++)
@@ -155,7 +196,8 @@ Node* SinglyLinkedList::get_node(unsigned int position) const
     return current_node;
 }
 
-void SinglyLinkedList::print() const
+template<class T>
+void SinglyLinkedList<T>::print() const
 {
     Node* current_node = head;
     unsigned int i = 0;
