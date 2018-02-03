@@ -17,28 +17,28 @@ SinglyLinkedList<T>::~SinglyLinkedList()
 
 // Returns the pointer to the head of the vector
 template<class T>
-typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::begin()
+typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin()
 {
     return head;
 }
 
 // Const version for the pointer to the head of the vector
 template<class T>
-const typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::begin() const
+const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::begin() const
 {
     return head;
 }
 
 // Returns the pointer to the butt of the vector
 template<class T>
-typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::end()
+typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end()
 {
     return tail;
 }
 
 // Const version for the pointer to the butt of the vector
 template<class T>
-const typename SinglyLinkedList<T>::Iterator SinglyLinkedList<T>::end() const
+const typename SinglyLinkedList<T>::iterator SinglyLinkedList<T>::end() const
 {
     return tail;
 }
@@ -49,24 +49,27 @@ void SinglyLinkedList<T>::push_back(const &T input)
     Node<T> *new_node = new Node;
     new_node->data = input;
 
-    if (head == NULL)
+    // Set both head and tail to the new node if the list is empty
+    if (head == nullptr)
     {
         head = new_node;
         tail = new_node;
-        new_node = NULL;
+        new_node = nullptr;
     }
+    // Add the node to the tail end
     else
     {
         tail->next = new_node;
         tail = new_node;
     }
+    // Size will increase regardless of what we do
     size++;
 }
 
 template<class T>
 void SinglyLinkedList<T>::pop_back()
 {
-    if (head == NULL)
+    if (head == nullptr)
     {
         std::cout << "There's nothing in the list to pop" << std::endl;
     }
@@ -74,14 +77,14 @@ void SinglyLinkedList<T>::pop_back()
     {
         Node* current_node = head;
         Node* previous_node = head;
-        while (current_node->next != NULL)
+        while (current_node->next != nullptr)
         {
             previous_node = current_node;
             current_node = current_node->next;
         }
         tail = previous_node;
-        previous_node->next = NULL;
-        previous_node = NULL;
+        previous_node->next = nullptr;
+        previous_node = nullptr;
         size--;
     }
 }
@@ -92,11 +95,11 @@ void SinglyLinkedList<T>::push_head(const &T input)
     Node* new_node = new Node;
     new_node->data = input;
 
-    if (head == NULL)
+    if (head == nullptr)
     {
         head = new_node;
         tail = new_node;
-        new_node = NULL;
+        new_node = nullptr;
     }
     else
     {
@@ -109,7 +112,7 @@ void SinglyLinkedList<T>::push_head(const &T input)
 template<class T>
 void SinglyLinkedList<T>::pop_head()
 {
-    if (head == NULL)
+    if (head == nullptr)
     {
         std::cout << "There's nothing in the list to pop" << std::endl;
     }
@@ -123,7 +126,7 @@ void SinglyLinkedList<T>::pop_head()
 
 // Starts from zero, which is head
 template<class T>
-void SinglyLinkedList<T>::insert(const &T data, unsigned int position)
+void SinglyLinkedList<T>::insert(const &T data, SinglyLinkedList<T>::iterator position)
 {
     Node* current_node = head;
     Node* previous_node = head;
@@ -134,8 +137,8 @@ void SinglyLinkedList<T>::insert(const &T data, unsigned int position)
     }
     previous_node->next = new_node;
     new_node->next = current_node;
-    previous_node = NULL;
-    current_node = NULL;
+    previous_node = nullptr;
+    current_node = nullptr;
     size++;
 }
 
@@ -150,9 +153,9 @@ void SinglyLinkedList<T>::remove(unsigned int position)
         current_node = current_node->next;
     }
     previous_node->next = current_node->next;
-    current_node->next = NULL;
-    current_node = NULL;
-    previous_node = NULL;
+    current_node->next = nullptr;
+    current_node = nullptr;
+    previous_node = nullptr;
     size--;
 }
 
@@ -182,12 +185,12 @@ bool SinglyLinkedList<T>::is_empty() const
 
 // Inputting a position greater than size-1 results in tail
 template<class T>
-Node* SinglyLinkedList<T>::get_node(unsigned int position) const
+Node* SinglyLinkedList<T>::get_node(iterator position) const
 {
     Node* current_node = head;
     for (unsigned int i = 0; i < position; i++)
     {
-        if (current_node->next == NULL)
+        if (current_node->next == nullptr)
         {
             break;
         }
@@ -209,13 +212,13 @@ void SinglyLinkedList<T>::print() const
         {
             std::cout << " <---- HEAD"; 
         }
-        if (current_node->next == NULL)
+        if (current_node->next == nullptr)
         {
             std::cout << " <---- TAIL" << std::endl; 
             std::cout << "                |\n";
             std::cout << "                |\n";
             std::cout << "                V\n";
-            std::cout << "              NULL\n\n";
+            std::cout << "               NULL\n\n";
             break;
         }
         else
@@ -228,6 +231,6 @@ void SinglyLinkedList<T>::print() const
         current_node = current_node->next;
         i++;
     }
-    current_node = NULL;
+    current_node = nullptr;
 }
 

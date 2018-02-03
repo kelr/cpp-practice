@@ -10,17 +10,16 @@ class SinglyLinkedList
 {
 public:
 
-    typedef T* Iterator;
+    typedef T* iterator;
 
     SinglyLinkedList();
     ~SinglyLinkedList();
 
+    iterator begin();
+    const iterator begin() const;
 
-    Iterator begin();
-    const Iterator begin() const;
-    
-    Iterator end();
-    const Iterator end() const;
+    iterator end();
+    const iterator end() const;
 
     // Add a node to the back of the list
     void push_back(const &T input);
@@ -35,10 +34,9 @@ public:
     void pop_head();
 
     // Insert data at position
-    void insert(const &T data, unsigned int position);
+    void insert(const &T data, iterator position);
 
-
-    void remove(unsigned int position);
+    void remove(iterator position);
 
     Node* get_head() const;
 
@@ -48,7 +46,7 @@ public:
 
     bool is_empty() const;
 
-    Node* get_node(unsigned int position) const;
+    Node* get_node(iterator position) const;
 
     void print() const;
 
