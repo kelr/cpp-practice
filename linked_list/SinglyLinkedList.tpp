@@ -170,15 +170,15 @@ void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
 }
 
 template<class T>
-typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_head() const
+T SinglyLinkedList<T>::get_head() const
 {
-    return head;
+    return head->data;
 }
 
 template<class T>
-typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_tail() const
+T SinglyLinkedList<T>::get_tail() const
 {
-    return tail;
+    return tail->data;
 }
 
 template<class T>
@@ -191,23 +191,6 @@ template<class T>
 bool SinglyLinkedList<T>::is_empty() const
 {
     return size == 0;
-}
-
-// Inputting a position greater than size-1 results in tail
-template<class T>
-typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(iterator position) const
-{
-    Node* current_node = head;
-    iterator iter;
-    for (iter = begin(); iter != position; iter++)
-    {
-        if (current_node->next == nullptr)
-        {
-            break;
-        }
-        current_node = current_node->next;
-    }
-    return current_node;
 }
 
 template<class T>
@@ -245,3 +228,39 @@ void SinglyLinkedList<T>::print() const
     current_node = nullptr;
 }
 
+template<class T>
+T SinglyLinkedList<T>::get_data_at(iterator position) const
+{
+
+
+}
+
+template<class T>
+void SinglyLinkedList<T>::reverse()
+{
+
+}
+
+template<class T>
+void SinglyLinkedList<T>::remove_first_encounter(const T &input_data)
+{
+
+}
+
+
+// Inputting a position greater than size-1 results in tail
+template<class T>
+typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(iterator position) const
+{
+    Node* current_node = head;
+    iterator iter;
+    for (iter = begin(); iter != position; iter++)
+    {
+        if (current_node->next == nullptr)
+        {
+            break;
+        }
+        current_node = current_node->next;
+    }
+    return current_node;
+}

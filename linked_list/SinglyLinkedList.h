@@ -36,26 +36,30 @@ public:
 
     void remove(iterator position);
 
-    typename SinglyLinkedList<T>::Node* get_head() const;
+    T get_head() const;
 
-    typename SinglyLinkedList<T>::Node* get_tail() const;
+    T get_tail() const;
 
     std::size_t get_size() const;
 
     bool is_empty() const;
 
-    typename SinglyLinkedList<T>::Node* get_node(iterator position) const;
-
     void print() const;
 
+    T get_data_at(iterator position) const;
 
-    //size() num of elements
-    //erase(index) remove node at index 
+    void reverse();
+
+    void remove_first_encounter(const T &input_data);
+
+
     //get_value_from_back(n) get value of node at nth position from end
     //reverse() reverse list
     //remove_value(value) remove first encounter of value
 
 private:
+    typename SinglyLinkedList<T>::Node* get_node(iterator position) const;
+    
     struct Node
     {  
         T data;
