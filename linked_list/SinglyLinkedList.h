@@ -62,6 +62,9 @@ public:
     // Remove the node where the first instance of the data appears
     void remove_first_encounter(const T &input_data);
 
+    // Clear all elements from the list
+    void clear_list();
+
 private:
     // Get a node at a position
     typename SinglyLinkedList<T>::Node* get_node(int position) const;

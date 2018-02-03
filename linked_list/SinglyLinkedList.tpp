@@ -9,7 +9,19 @@ SinglyLinkedList<T>::SinglyLinkedList()
 template<class T>
 SinglyLinkedList<T>::~SinglyLinkedList()
 {
-    //TODO: delete all the nodes that we new'ed
+    Node* curr_node = head;
+    Node* prev_node = head;
+    if (curr_node != nullptr)
+    {
+        for (std::size_t i = 0; i < size; i++)
+        {
+            prev_node = curr_node;
+            curr_node = curr_node->next;
+            delete(prev_node);
+        }
+    }
+    prev_node = nullptr;
+    curr_node = nullptr;
     head = nullptr;
     tail = nullptr;
 }
@@ -258,7 +270,33 @@ T SinglyLinkedList<T>::get_data_at(int position) const
 template<class T>
 void SinglyLinkedList<T>::reverse()
 {
+    if (size > 1)
+    {
+        Node* curr_node = head;
+        Node* next_node = head;
+        Node* prev_node = head;
+        tail = head;
 
+        for (std::size_t i = 0; i < size; i++)
+        {
+            if (curr_node->next == nullptr)
+            {
+                head = curr_node;
+                curr_node->next = prev_node;
+            }
+            else
+            {
+                next_node = curr_node->next;
+                curr_node->next = prev_node;
+                prev_node = curr_node;
+                curr_node = next_node;
+            }
+        }
+        tail->next = nullptr;
+        curr_node = nullptr;
+        next_node = nullptr;
+        prev_node = nullptr;
+    }
 }
 
 template<class T>
@@ -298,6 +336,23 @@ void SinglyLinkedList<T>::remove_first_encounter(const T &input_data)
     }
 }
 
+template<class T>
+void SinglyLinkedList<T>::clear_list()
+{
+    Node* curr_node = head;
+    Node* prev_node = head;
+    if (curr_node != nullptr)
+    {
+        for (std::size_t i = 0; i < size; i++)
+        {
+            prev_node = curr_node;
+            curr_node = curr_node->next;
+            delete(prev_node);
+        }
+    }
+    head = nullptr;
+    tail = nullptr;
+}
 
 // Inputting a position greater than size-1 results in tail
 template<class T>
