@@ -32,13 +32,17 @@ int main(void)
 
     list.print();
 
-    //list.instert()
+    list.insert(77,1);
 
-    //list.remove()
+    list.print();
+
+    std::cout << "data at pos 1: " << list.get_data_at(1) << std::endl;
+
+    list.remove(1);
+
+    list.print();
 
     //list.reverse()
-
-    //std::cout << list.get_data_at() << std::endl;
 
     return 0;
 }

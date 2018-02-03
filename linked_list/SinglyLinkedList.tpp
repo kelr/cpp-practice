@@ -125,48 +125,68 @@ void SinglyLinkedList<T>::pop_head()
 
 // Position starts from 0, which is head
 template<class T>
-void SinglyLinkedList<T>::insert(const T &input_data, SinglyLinkedList<T>::iterator position)
+void SinglyLinkedList<T>::insert(const T &input_data, int position)
 {
-    Node* new_node = new Node;
-    new_node->data = input_data;
-
-    Node* curr_node = head;
-    Node* prev_node = head;
-    iterator iter;
-
-    for (iter = begin(); iter != position; iter++)
+    // Make sure the input is legit
+    assert(position <= size-1);
+    // Edge case
+    if (position == 0)
     {
-        prev_node = curr_node;
-        curr_node = curr_node->next;
+        push_head(input_data);
     }
+    else
+    {
+        Node* new_node = new Node;
+        new_node->data = input_data;
 
-    prev_node->next = new_node;
-    new_node->next = curr_node;
+        Node* curr_node = head;
+        Node* prev_node = head;
 
-    prev_node = nullptr;
-    curr_node = nullptr;
-    size++;
+        if (curr_node != nullptr)
+        {
+            for (std::size_t i = 0; i != position; i++)
+            {
+                curr_node = curr_node->next;
+            }
+            prev_node->next = new_node;
+            new_node->next = curr_node;
+
+            prev_node = nullptr;
+            curr_node = nullptr;
+            size++;
+        }
+    }
 }
 
 template<class T>
-void SinglyLinkedList<T>::remove(SinglyLinkedList<T>::iterator position)
+void SinglyLinkedList<T>::remove(int position)
 {
-    Node* curr_node = head;
-    Node* prev_node = head;
-    iterator iter;
-
-    for (iter = begin(); iter != position; iter++)
+    if (position == 0)
     {
-        prev_node = curr_node;
-        curr_node = curr_node->next;
+        pop_head();
     }
-
-    prev_node->next = curr_node->next;
-    curr_node->next = nullptr;
-    delete(curr_node);
-    curr_node = nullptr;
-    prev_node = nullptr;
-    size--;
+    else if (position == size-1)
+    {
+        pop_back();
+    }
+    else
+    {
+        Node* curr_node = head;
+        Node* prev_node = head;
+        if (curr_node != nullptr)
+        {
+            for (std::size_t i = 0; i != position; i++)
+            {
+                curr_node = curr_node->next;
+            }
+            prev_node->next = curr_node->next;
+            curr_node->next = nullptr;
+            delete(curr_node);
+            curr_node = nullptr;
+            prev_node = nullptr;
+            size--;
+        }
+    }
 }
 
 template<class T>
@@ -196,40 +216,41 @@ bool SinglyLinkedList<T>::is_empty() const
 template<class T>
 void SinglyLinkedList<T>::print() const
 {
-    Node* current_node = head;
+    Node* curr_node = head;
     int i = 0;
     std::cout << "============== SinglyLinkedList size " << size << " ==================" << std::endl; 
-    while (1)
+    if (curr_node != nullptr)
     {
-        std::cout << "[Node Position: " << i << " Data: " << current_node->data << "]";
-        if (i == 0)
+        for (std::size_t i = 0; i < size; i++)
         {
-            std::cout << " <---- HEAD"; 
+            std::cout << "[Node Position: " << i << " Data: " << curr_node->data << "]";
+            if (i == 0)
+            {
+                std::cout << " <---- HEAD"; 
+            }
+            if (curr_node->next == nullptr)
+            {
+                std::cout << " <---- TAIL" << std::endl; 
+                std::cout << "                |\n";
+                std::cout << "                |\n";
+                std::cout << "                V\n";
+                std::cout << "               NULL\n\n";
+                break;
+            }
+            else
+            {
+                std::cout << std::endl;
+                std::cout << "                |\n";
+                std::cout << "                |\n";
+                std::cout << "                V\n";
+            }
+            curr_node = curr_node->next;
         }
-        if (current_node->next == nullptr)
-        {
-            std::cout << " <---- TAIL" << std::endl; 
-            std::cout << "                |\n";
-            std::cout << "                |\n";
-            std::cout << "                V\n";
-            std::cout << "               NULL\n\n";
-            break;
-        }
-        else
-        {
-            std::cout << std::endl;
-            std::cout << "                |\n";
-            std::cout << "                |\n";
-            std::cout << "                V\n";
-        }
-        current_node = current_node->next;
-        i++;
-    }
-    current_node = nullptr;
-}
+        curr_node = nullptr;
+}}
 
 template<class T>
-T SinglyLinkedList<T>::get_data_at(iterator position) const
+T SinglyLinkedList<T>::get_data_at(int position) const
 {
     return get_node(position)->data;
 }
@@ -280,20 +301,18 @@ void SinglyLinkedList<T>::remove_first_encounter(const T &input_data)
 
 // Inputting a position greater than size-1 results in tail
 template<class T>
-typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(iterator position) const
+typename SinglyLinkedList<T>::Node* SinglyLinkedList<T>::get_node(int position) const
 {
-    Node* current_node = head;
-    if (current_node != nullptr)
+    // Make sure the input is legit
+    assert(position <= size);
+
+    Node* curr_node = head;
+    if (curr_node != nullptr)
     {
-        iterator iter;
-        for (iter = begin(); iter != position; iter++)
+        for (std::size_t i = 0; i != position; i++)
         {
-            if (current_node->next == nullptr)
-            {
-                break;
-            }
-            current_node = current_node->next;
+            curr_node = curr_node->next;
         }
     }
-    return current_node;
+    return curr_node;
 }
