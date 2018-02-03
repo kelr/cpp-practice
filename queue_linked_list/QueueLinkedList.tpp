@@ -8,16 +8,19 @@ QueueLinkedList<T>::QueueLinkedList()
 template<class T>
 QueueLinkedList<T>::~QueueLinkedList()
 {
-    Node* tmp_node = head;
-    while (head->next != nullptr)
+    if (!is_empty())
     {
-        tmp_node = head;
-        head = head->next;
-        delete(tmp_node);
+        Node* tmp_node = head;
+        while (head->next != nullptr)
+        {
+            tmp_node = head;
+            head = head->next;
+            delete(tmp_node);
+        }
+        // Edge delete, could delete tail too
+        delete(head);
+        tmp_node = nullptr;
     }
-    // Edge delete, could delete tail too
-    delete(head);
-    tmp_node = nullptr;
     head = nullptr;
     tail = nullptr;
 }
@@ -38,7 +41,6 @@ void QueueLinkedList<T>::enqueue(const T &data)
         tail->next = new_node;
         tail = new_node;
     }
-
 }
 
 template<class T>
@@ -58,7 +60,7 @@ void QueueLinkedList<T>::dequeue()
 }
 
 template<class T>
-bool QueueLinkedList<T>::is_empty()
+bool QueueLinkedList<T>::is_empty() const
 {
     return head == nullptr;
 }
@@ -66,5 +68,5 @@ bool QueueLinkedList<T>::is_empty()
 template<class T>
 void QueueLinkedList<T>::print()
 {
-
+    
 }

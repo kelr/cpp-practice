@@ -6,29 +6,29 @@
 template <class T>
 class QueueLinkedList
 {
-    public:
-        QueueLinkedList();
-        ~QueueLinkedList();
+public:
+    QueueLinkedList();
+    ~QueueLinkedList();
 
-        void enqueue(const T &data);
+    void enqueue(const T &data);
 
-        void dequeue();
+    void dequeue();
 
-        bool is_empty();
+    bool is_empty() const;
 
-        void print();
+    void print();
 
-    private:
-        struct Node
-        {
-            T data;
-            Node* next = nullptr;
-        }
-        Node* head;
-        Node* tail;
+private:
+    struct Node
+    {
+        T data;
+        Node* next = nullptr;
+    };
+    
+    Node* head;
+    Node* tail;
 };
 
 #include "QueueLinkedList.tpp"
-
 
 #endif //_KEL_Q_LINKED_LIST_
