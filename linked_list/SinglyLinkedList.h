@@ -62,12 +62,14 @@ private:
     struct Node
     {  
         T data;
-        Node *next;
+        Node* next;
     }   
 
-    Node<T> *head;
-    Node<T> *tail;
+    Node<T>* head;
+    Node<T>* tail;
     std::size_t size;
 };
+
+#include "SinglyLinkedList.tpp"
 
 #endif //_KEL_S_LINKED_LIST_H_
