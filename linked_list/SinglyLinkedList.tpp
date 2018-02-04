@@ -255,7 +255,8 @@ void SinglyLinkedList<T>::print() const
             curr_node = curr_node->next;
         }
         curr_node = nullptr;
-}}
+    }
+}
 
 template<class T>
 T SinglyLinkedList<T>::get_data_at(int position) const

@@ -1,5 +1,5 @@
-#ifndef _KEL_Q_LINKED_LIST_
-#define _KEL_Q_LINKED_LIST_
+#ifndef _KEL_Q_LINKED_LIST_H_
+#define _KEL_Q_LINKED_LIST_H_
 
 #include <iostream>
 
