@@ -1,24 +1,36 @@
 // Leetcode 1. Two Sum
 
 #include <vector>
+#include <unordered_map>
 
 class Solution 
 {
 public:
     std::vector<int> twoSum(std::vector<int>& nums, int target) 
     {
-        std::vector<int> out;
+        int complement = 0;
+        std::vector<int> output;
+        std::unordered_map<int, int> history;
+
+        // Iterate through the input vector
         for (int i = 0; i < nums.size(); i++)
-        {
-            for (int j = i+1; j < nums.size(); j++)
+        {   
+            // Find the complement for the current number
+            complement = target - nums[i];
+
+            // If we've seen this complement before, we're done
+            if (history.count(complement) == 1)
             {
-                if (nums[i] + nums[j] == target)
-                {
-                    out.push_back(i);
-                    out.push_back(j);
-                }
+                output.push_back(history[complement]);
+                output.push_back(i);
+                break;
+            }
+            // If we didn't find a complement, save the current number and its index to be checked next iteration
+            else
+            {
+                history[nums[i]] = i;
             }
         }
-        return out;
+        return output;
     }
 };
