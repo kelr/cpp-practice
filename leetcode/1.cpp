@@ -3,6 +3,8 @@
 #include <vector>
 #include <unordered_map>
 
+// 2/3/2018 - 76.26th percentile. Not terrible.
+
 class Solution 
 {
 public:

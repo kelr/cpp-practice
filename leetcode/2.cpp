@@ -6,6 +6,9 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+// 2/3/2018 - A solid 27.50th percentile boys
+
 class Solution 
 {
 public:
