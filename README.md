@@ -2,4 +2,4 @@
 
 ## A place where projects go to die, because they're practice projects
 
-Mostly data structures
+Mostly data structures, some classwork and sorting algorithms
